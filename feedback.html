@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BhajanAmrit</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    min-height:100vh;
+    position:relative;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:url('images/Kamadhenu.jpg') no-repeat center/cover;
+    opacity:0.3;
+    z-index:-1;
+}
+.container{
+    background:#fff;
+    margin:60px auto;
+    padding:30px;
+    max-width:420px;
+    width:90%;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+h1{color:#d35400;}
+input,textarea{
+    width:85%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+textarea{height:100px;resize:none;}
+button{
+    padding:12px 30px;
+    background:linear-gradient(45deg,#ff9933,#ff6600);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+.thankyou{
+    display:none;
+    color:green;
+    margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Feedback करें</h1>
+<p>अपने विचार और फीडबैक साझा करें</p>
+
+<form id="FeedbackForm">
+<input type="text" placeholder="आपका नाम" required>
+<input type="email" placeholder="आपका Email" required>
+<textarea placeholder="अपना फीडबैक लिखें" required></textarea>
+<button type="submit">Submit</button>
+</form>
+
+<div class="thankyou" id="thanks">
+धन्यवाद! आपका फीडबैक सुरक्षित रूप से सेव हो गया।
+</div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAc4IBNvw2c_thV5L5YQc8qvaIOb_DtmS4",
+  authDomain: "bhajanamrit-f9419.firebaseapp.com",
+  databaseURL: "https://bhajanamrit-f9419-default-rtdb.firebaseio.com",
+  projectId: "bhajanamrit-f9419",
+  storageBucket: "bhajanamrit-f9419.firebasestorage.app",
+  messagingSenderId: "581128713334",
+  appId: "1:581128713334:web:c80658abaad562e2b89b57"
+};
+
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+document.getElementById("FeedbackForm").addEventListener("submit",function(e){
+    e.preventDefault();
+
+    const inputs=this.querySelectorAll("input");
+    const name=inputs[0].value;
+    const email=inputs[1].value;
+    const feedback=this.querySelector("textarea").value;
+
+    database.ref("feedbacks").push({
+        name:name,
+        email:email,
+        feedback:feedback,
+        time:new Date().toISOString()
+    });
+
+    document.getElementById("thanks").style.display="block";
+    this.reset();
+});
+</script>
+
+</body>
+</html>

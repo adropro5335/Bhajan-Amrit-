@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Favorites - Bhajan Amrit</title>
+<style>
+/* Header CSS */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff8f0;
+  color: #333;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #ff6600;
+  color: #fff;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo { width: 50px; height: 50px; }
+.header-left h1 a { text-decoration: none; color: #fff; }
+.header-nav {
+  margin-top: 10px;
+}
+.header-nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  background: rgba(255,255,255,0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.header-nav a:hover { background: rgba(255,255,255,0.4); }
+.tagline { margin-top: 5px; font-style: italic; color: #fff; }
+
+/* Favorites Section CSS */
+#fav-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+.bhajan-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: 250px;
+  text-align: center;
+}
+.bhajan-card img { width: 100%; border-radius: 10px; }
+.bhajan-card h3 { margin: 10px 0 5px 0; font-size: 18px; }
+.bhajan-card p { margin: 0; color: #666; }
+.bhajan-card a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #ff6600;
+  font-weight: bold;
+}
+.bhajan-card a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <img src="images/logo.png" alt="Bhajan Amrit Logo" class="logo">
+    <h1><a href="index.html">🙏 भजन अमृत</a></h1>
+  </div>
+
+  <nav class="header-nav">
+    <a href="index.html">Home</a>
+    <a href="donation.html">Donation</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="privacy.html">Privacy & Policy</a>
+    <a href="favorites.html">Favorites</a>
+  </nav>
+
+  <p class="tagline">नवीनतम भजन लिरिक्स</p>
+</header>
+
+<h2 style="text-align:center; margin-top:20px;">Favorite Bhajans</h2>
+<div id="fav-container"></div>
+
+<script>
+  // Example bhajans array; replace with your actual bhajans data
+  const allBhajans = [
+    {
+      id: "ram-bhajan",
+      title: "Jara Der Thahro Ram | जरा देर ठहरो राम",
+      god: "राम",
+      image: "images/thumbnails/ramji.jpg",
+      lyrics: "जरा देर ठहरो राम..."
+    },
+    {
+      id: "shiva-bhajan",
+      title: "Shiv Mahima | शिव महिमा",
+      god: "शिव",
+      image: "images/thumbnails/shiva.jpg",
+      lyrics: "ॐ नमः शिवाय..."
+    },
+    {
+      id: "hanuman-bhajan",
+      title: "Sankat Mochan Hanuman | संकट मोचन हनुमान",
+      god: "हनुमान",
+      image: "images/thumbnails/hanuman.jpg",
+      lyrics: "हनुमान चालिसा..."
+    }
+    // Add more bhajans here
+  ];
+
+  const favorites = JSON.parse(localStorage.getItem('favorites') || "[]");
+  const container = document.getElementById('fav-container');
+
+  if(favorites.length === 0){
+    container.innerHTML = "<p style='text-align:center; width:100%;'>आपने अभी कोई भजन पसंद नहीं किया है।</p>";
+  } else {
+    favorites.forEach(id => {
+      const bhajan = allBhajans.find(b => b.id === id);
+      if(bhajan){
+        const div = document.createElement('div');
+        div.classList.add('bhajan-card');
+        div.innerHTML = `
+          <img src="${bhajan.image}" alt="${bhajan.title}" />
+          <h3>${bhajan.title}</h3>
+          <p>${bhajan.god}</p>
+          <a href="#" onclick="viewLyrics('${bhajan.id}')">Lyrics देखें</a>
+        `;
+        container.appendChild(div);
+      }
+    });
+  }
+
+  function viewLyrics(bhajanId){
+    const bhajan = allBhajans.find(b => b.id === bhajanId);
+    if(bhajan){
+      alert(bhajan.lyrics);
+    }
+  }
+  
+</script>
+
+</body>
+</html>

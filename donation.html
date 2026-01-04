@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>दान करें - BhajanAmri</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #fff8f0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+h1 { color: #d35400; }
+p { font-size: 16px; margin: 15px 0; }
+input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ff9933, #ff6600);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+button:hover {
+    background: linear-gradient(45deg, #ff6600, #ff9933);
+}
+.qr-box {
+    background: #fef5e6;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* center align QR and text */
+}
+.qr-box img { width: 180px; height: 180px; border-radius: 15px; margin-bottom: 10px; }
+.upi-id {
+    font-weight: bold;
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+}
+.upi-value {
+    background: linear-gradient(45deg, #ff9933, #ff6600);
+    background-clip: text;          /* standard */
+    -webkit-background-clip: text;  /* Chrome, Safari */
+    -moz-background-clip: text;     /* Firefox old */
+    color: transparent;             /* fallback */
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    font-weight: bold;
+}
+.upi-value::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(45deg, #ff9933, #ff6600);
+    border-radius: 1px;
+}
+.thankyou {
+    display: none;
+    color: green;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('images/Kamadhenu.jpg') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.3;  /* opacity adjust karo 0.1 se 0.9 tak */
+    z-index: -1;
+}
+
+
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>दान करें</h1>
+    <p>हमारी वेबसाइट को मेंटेन करने और नए भक्ति-सामग्री उपलब्ध कराने में मदद करें।</p>
+
+    <p>राशि दर्ज करें:</p>
+    <input type="number" id="amount" placeholder="₹ जितना चाहें" min="1">
+    <br>
+    <button onclick="donate()">दान करें</button>
+
+    <div class="qr-box">
+        <p>UPI से दान करें:</p>
+        <!-- QR code path यहीं बदलें -->
+        <img src="images/QR.jpeg" alt="UPI QR Code">
+        <p class="upi-id">UPI ID: <span class="upi-value">UNAVAILABLE!</span></p>
+    </div>
+
+    <div class="thankyou" id="thankyouMsg">
+        धन्यवाद! आपका योगदान हमारे भक्ति मिशन में मदद करेगा।
+    </div>
+</div>
+
+<script>
+function donate() {
+    var amount = document.getElementById("amount").value;
+    if(amount && amount > 0){
+        document.getElementById("thankyouMsg").style.display = "block";
+        alert("कृपया नीचे दिए गए QR या UPI ID से ₹" + amount + " भेजें।");
+    } else {
+        alert("कृपया दान की राशि दर्ज करें।");
+    }
+}
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title id="page-title">Bhajan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <img src="images/logo.png" alt="Bhajan Amrit Logo" class="logo">
+    <h1><a href="index.html">🙏 भजन अमृत</a></h1>
+  </div>
+
+  <nav class="header-nav">
+    <a href="index.html">Home</a>
+    <a href="donation.html">Donation</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="privacy.html">Privacy & Policy</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h2 id="bhajan-title"></h2>
+
+  <a id="yt-link" href="#" target="_blank" rel="noopener noreferrer">
+    <img id="bhajan-image" class="bhajan-img" src="" alt="">
+  </a>
+
+ <div class="lyrics-box">
+  <button class="copy-btn" onclick="copyLyrics()" title=""></button>
+  <button class="share-btn" onclick="shareLyrics()" title=""></button>
+  <pre id="bhajan-lyrics" class="lyrics"></pre>
+</div>
+
+<footer class="footer">
+  <p>© 2025 Bhajan Amrit</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
